@@ -1,0 +1,128 @@
+{
+	"info": {
+		"_postman_id": "23fea581-0d86-4b7d-b92f-af97d573d063",
+		"name": "API DemoDOC",
+		"description": "# Introdução\n\nEssa é uma demontração de como será a documentação de sua API, documentação essa que servirá para consulta e apoio no uso através da ferramenta **POSTMAN**.\n\n# Autenticação e Autorização\n\n- Para utilizar os recursos da API da IOPay, primeiro você precisa se autenticar através dessa endpoint para obter o bearer token.\n- Você deve enviar o bearer token recebido nessa requisição através do cabeçalho Authorization em todas as requisições que fizer aos demais endpoints dessa api.\n    \n\n## Credenciais\n\n| Parâmetro | Descrição |\n| --- | --- |\n| email | Email vinculado a sua conta na IOPAY |\n| io_seller_id | Seu ID de vendedor na IOPAY |\n| secret | Seu código secreto de vendedor |\n\n# Códigos de erros\n\nUma boa prática é informar os códigos de erros. Aqui pode expor uma tabela com cada um dos erros de sua API que são retornadas aos usuários.\n\nStartFragment\n\nQuando ocorre alguma falha com a requisição ou o processamento do pedido, uma resposta HTTP 4xx ou 5xx é disparada juntamente com JSON que identifica e fornece detalhes sobre os detalhes do erro ocorrido.\n\nAtravés do JSON retornado, em casos de falha, você obterá o status, status_code, categoria da falha e mensagem legível para humanos que explica o motivo do erro ocorrido.\n\n| status_code | tipo | categoria | descrição | código de erro da bandeira |\n| --- | --- | --- | --- | --- |\n| 500 | processing_error | server_api_error | Ocorreu um erro de processamento . Se você receber esta mensagem, entre em contato com [integracao@iopay.com.br](mailto:integracao@iopay.com.br) |  |\n| 409 | invalid_request_error | duplicate_taxpayer_id | Customer with this taxpayer_id already exists. |  |\n| 409 | Conflict | split_rule_precondition_creation_failure | Split operation failed due to precondition rules. |  |\n| 408 | invalid_request_error | service_request_timeout | Credit card process is temporarily unavailable at the specified location. |  |\n| 404 | invalid_request_error | endpoint_not_found | The requested URL was not found on the server |  |\n| 400 | invalid_request_error | transaction_amount_error | The minimum amount is $0.50. The amount must be a positive integer in cents representing how much to charge, e.g 1260 for R$12.60 |  |\n| 400 | invalid_request_error | transfer_amount_error | The minimum amount is $0.50. The amount must be a positive integer in cents representing how much to charge, e.g 1260 for R$12.60 |  |\n| 400 | invalid_request_error | invalid_payment_information | Invalid payment information. Please verify request parameters. |  |\n| 402 | invalid_request_error | insufficient_escrow_funds_error | Requested transfer exceeds remaining settled funds in escrow. |  |\n| 402 | invalid_request_error | capture_transaction_error | The capture request failed. Transaction could not be captured. |  |\n| 402 | invalid_request_error | no_action_taken | No action taken. Unable to back out prior transaction |  |\n| 402 | invalid_request_error | seller_authorization_refused | Seller has not been authorized to charge credit cards. Complete activation to start processing payments. |  |\n| 402 | invalid_request_error | void_transaction_error | The void request failed. Transaction could not be voided. |  |\n| 402 | invalid_request_error | seller_not_found | The seller has not be found |  |\n| 402 | card_error | invalid_card_token | The card token is invalid |  |\n| 402 | invalid_request_error | customer_not_exists | This costumer id not exists |  |\n| 402 | invalid_request_error | customer_card_not_found | Customer card not found |  |\n| 402 | card_error | invalid_expiry_month | Invalid expiry month value. Please verify request parameters. |  |\n| 402 | card_error | invalid_expiry_year | Invalid expiry year value. Please verify request parameters. |  |\n| 402 | card_error | card_customer_not_associated | Transaction denied. No active card |  |\n| 402 | card_error | insufficient_funds_error | Requested credit exceeds remaining settled funds. | 51 |\n| 402 | card_error | expired_card_error | The credit card has expired. | 33 |\n| 402 | card_error | invalid_card_number | The card number is not a valid credit card number. | 15 |\n| 402 | card_error | invalid_pin_code | Transaction denied. Invalid PIN code. | 55 |\n| 402 | card_error | authorization_refused | Transação ilegal | 58 |\n\nEndFragment\n\n# Rate limit\n\nIs there a limit to the number of requests a user can send?",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_uid": "640499-23fea581-0d86-4b7d-b92f-af97d573d063"
+	},
+	"item": [
+		{
+			"name": "Auth",
+			"id": "bed1addf-cbff-4431-b8a7-0e52dc080e38",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"email\": \"email@yourdomain.com\",\r\n    \"secret\": \"your_secret\",\r\n    \"io_seller_id\": \"c972872ef43298df37b54ef8f6f418cc\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://{{host}}.iopay.com.br/api/v1//auth/login",
+					"protocol": "https",
+					"host": [
+						"{{host}}",
+						"iopay",
+						"com",
+						"br"
+					],
+					"path": [
+						"api",
+						"v1",
+						"",
+						"auth",
+						"login"
+					]
+				}
+			},
+			"response": [
+				{
+					"id": "2ac69d77-7b26-47ea-a47d-6087e8a58d89",
+					"name": "Authentication OK",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://api.iopay.com.br/api/v1//auth/login",
+							"protocol": "https",
+							"host": [
+								"api",
+								"iopay",
+								"com",
+								"br"
+							],
+							"path": [
+								"api",
+								"v1",
+								"",
+								"auth",
+								"login"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"name": "Content-Type",
+							"value": "application/json",
+							"description": "",
+							"type": "text"
+						}
+					],
+					"cookie": [],
+					"body": "{\r\n  \"access_token\": \"<YOUR BEARER TOKEN>\",\r\n  \"token_type\": \"bearer\",\r\n  \"expires_in\": 3600\r\n}"
+				},
+				{
+					"id": "7edf1064-7258-4f2c-80ae-0c06f1dcd5ad",
+					"name": "Unauthorized",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://api.iopay.com.br/api/v1//auth/login",
+							"protocol": "https",
+							"host": [
+								"api",
+								"iopay",
+								"com",
+								"br"
+							],
+							"path": [
+								"api",
+								"v1",
+								"",
+								"auth",
+								"login"
+							]
+						}
+					},
+					"status": "Unauthorized",
+					"code": 401,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"name": "Content-Type",
+							"value": "application/json",
+							"description": "",
+							"type": "text"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"error\": \"Unauthorized\"\n}"
+				}
+			]
+		}
+	]
+}
